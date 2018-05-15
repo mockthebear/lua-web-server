@@ -1,0 +1,8 @@
+﻿<html>
+<head>
+<title>Testing get() function.</title>
+</head><body>
+<p>Testing get() function.</p>
+<p>Here is the get('name') return:<b> <%lua echo(math.random(0,999999)) %></b></p>
+</body>
+</html>

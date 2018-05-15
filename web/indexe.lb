@@ -1,0 +1,9 @@
+﻿<html>
+<head>
+<title>Starting a tour!</title>
+</head><body>
+<p>Lets start a litte tour!</p>
+<p>Lets start by this function: <b>get(v)</b><br><a href="get.lb?name=Look on aderres bar :D">get()</a> </p>
+
+</body>
+</html>

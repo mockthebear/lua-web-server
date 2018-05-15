@@ -1,0 +1,113 @@
+<title><%lua dofile('web/config.lua') echo(acc.title) %></title>
+<body>
+<table>
+  <tr>
+	<td width="110" height="25" style="background-color:#00CCFF">
+  <%lua
+	if post('kill') then
+		set_cookie('LOGGED','',0)
+		set_cookie('ACC','',0)
+		set_cookie('PSS','',0)
+		echo([[Login<br />
+        <form name="input" action="index.lb" method="post">
+          <input type="text" name="account" style="background:#FFCC00" />
+          <input type="password" name="pass" style="background:#FFCC00"/>
+          <input name="submit" type="submit" value="Login" />
+        </form>]])
+	elseif not cookie('LOGGED') or (cookie('ACC') ~= '1' or cookie('PSS') ~= '123') then
+		if not post('pass') and not post('account') then
+   			echo([[Login<br />
+        <form name="input" action="index.lb" method="post">
+          <input type="text" name="account" style="background:#FFCC00" />
+          <input type="password" name="pass" style="background:#FFCC00"/>
+          <input name="submit" type="submit" value="Login" />
+        </form>]])
+		else
+			if post('pass') == '123' and post('account') == '1' then
+				echo([[<br />
+        <form name="input" action="index.lb" method="post">
+          <input type="hidden" name="kill" value="1"/>
+          <input name="submit" type="submit" value="Logout" />
+        </form>]])
+				set_cookie('LOGGED','1',os.time()+60)
+				set_cookie('ACC',post('account'),os.time()+60)
+				set_cookie('PSS',post('pass'),os.time()+60)
+			else
+				echo([[Login<br />
+        <form name="input" action="index.lb" method="post">
+          <input type="text" name="account" style="background:#FFCC00" />
+          <input type="password" name="pass" style="background:#FFCC00"/>
+          <input name="submit" type="submit" value="Login" />
+        </form><b>Wrong password!</b>]])
+			end
+		end
+	else
+		echo([[<br />
+        <form name="input" action="index.lb" method="post">
+          <input type="hidden" name="kill" value="1"/>
+          <input name="submit" type="submit" value="Logout" />
+        </form>]])
+	end %>
+<table>
+<tr>
+<td>qq</td><td></td></tr>
+	<tr>
+		<td>
+		qq
+		</td>
+	</tr>
+	<tr>
+		<td>
+		qq
+		</td>
+	</tr>
+	<tr>
+		<td>
+		qq
+		</td>
+	</tr>
+	<tr>
+		<td>
+		qq
+		</td>
+	</tr>
+
+</table>
+</td>
+	<td>
+<%lua echo('News<br >')
+	echo('-------------------------')
+%>
+</td>
+
+</td>
+    <td width="110">
+<table>
+<tr>
+<td>qq</td><td></td></tr>
+	<tr>
+		<td>
+		qq
+		</td>
+	</tr>
+	<tr>
+		<td>
+		qq
+		</td>
+	</tr>
+	<tr>
+		<td>
+		qq
+		</td>
+	</tr>
+	<tr>
+		<td>
+		qq
+		</td>
+	</tr>
+
+</table>
+
+</td>
+  </tr>
+</table>

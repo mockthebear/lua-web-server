@@ -1,0 +1,118 @@
+<style>
+body {
+
+}
+div.history {
+	width: 200px;
+	background: #fffadd;
+	padding: 0.55em;
+	margin: 5px;
+	border: 1px solid #bbb;
+	color: #555;
+	font-size: 12px;
+}
+</style>
+<title><%lua dofile('web/config.lua') echo(acc.title) %></title>
+<body>
+<table width="741">
+  <tr>
+	<td width="140" height="25" style="background-color:#00CCFF" VALIGN="top">
+  <%lua 
+	if post('kill') then
+		set_cookie('LOGGED','',0)
+		set_cookie('ACC','',0)
+		set_cookie('PSS','',0)
+		echo([[Login<br />
+        <form name="input" action="index.lb" method="post">
+          <input type="text" name="account" style="background:#FFCC00" />
+          <input type="password" name="pass" style="background:#FFCC00"/>
+          <input name="submit" type="submit" value="Login" />
+        </form>]])
+	elseif not cookie('LOGGED') or (not doLogin(cookie('ACC') or '',cookie('PSS') or '')) then 
+		if not post('pass') and not post('account') then
+   			echo([[Login<br />
+        <form name="input" action="index.lb" method="post">
+          <input type="text" name="account" style="background:#FFCC00" />
+          <input type="password" name="pass" style="background:#FFCC00"/>
+          <input name="submit" type="submit" value="Login" />
+        </form>]])
+		else
+			if doLogin(post('account') or '',post('pass') or '') then
+				echo([[<br />
+        <form name="input" action="index.lb" method="post">
+          <input type="hidden" name="kill" value="1"/>
+          <input name="submit" type="submit" value="Logout" />
+        </form>]])
+				set_cookie('LOGGED','1',os.time()+60)
+				set_cookie('ACC',post('account'),os.time()+60)
+				set_cookie('PSS',post('pass'),os.time()+60)
+			else
+				echo([[Login<br />
+        <form name="input" action="index.lb" method="post">
+          <input type="text" name="account" style="background:#FFCC00" />
+          <input type="password" name="pass" style="background:#FFCC00"/>
+          <input name="submit" type="submit" value="Login" />
+        </form><b>Wrong password! </b>]])
+			end
+		end
+	else 
+		
+		echo([[<br />
+        <form name="input" action="index.lb" method="post">
+          <input type="hidden" name="kill" value="1"/>
+          <input name="submit" type="submit" value="Logout" />
+        </form>]])
+	end %>
+<hr>
+
+a
+<hr>
+
+a
+<br />
+a
+<br />
+a
+<br />
+a
+<br />
+a
+<br />
+a
+</td>
+	<td width="446" VALIGN="top" style="background-color:#CFFAFE">
+<%lua 
+local loged,info = doLogin(post('account') or cookie('ACC') or '',post('pass') or cookie('PSS') or '')
+	if not loged then
+		echo('<center>News</center><hr>')
+		echo('oi')  
+	else
+		echo('Olá Bem vindo.')
+	end
+%></td>
+
+
+    <td width="139" VALIGN="top" style="background-color:#00CCFF">
+
+	    <%lua
+		echo('We have <b>'..(#getOnlinePlayers())..'</b> players online.')
+		%>
+		<hr>
+	</td>
+		
+  </tr>
+</table>
+
+<div class="history">
+<b>Players online:</b> <%lua
+	 local t = getOnlinePlayers()
+	 for i,b in pairs(t) do
+	 	if #t == i then
+	 		echo(b..'.')
+		else
+			echo(b..', ')
+		end
+	  end
+
+	   %>
+</div>
